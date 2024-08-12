@@ -24,9 +24,9 @@ namespace rpg_tabel
             }
         }
 
-       
 
-        
+
+
 
         private void BtnGenerateName_Click_1(object sender, EventArgs e)
         {
@@ -36,10 +36,10 @@ namespace rpg_tabel
                 FantasyRace selectedRace = (FantasyRace)CBNamegerator.SelectedItem;
 
                 // Create a NameGenerator instance with the selected race
-                NameGenerator nameGenerator = new NameGenerator(selectedRace);
+                NameGenerator nameGenerator = new NameGenerator();
 
                 // Generate a name
-                string generatedName = nameGenerator.GenerateName();
+                string generatedName = nameGenerator.GenerateName(selectedRace);
 
                 // Display the generated name in the label
                 LblGenerated.Text = generatedName;
@@ -49,6 +49,12 @@ namespace rpg_tabel
                 // Handle the case where no item is selected
                 MessageBox.Show("Please select a fantasy race from the dropdown.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void BtnNewNpc_Click(object sender, EventArgs e)
+        {
+            var npcEditorForm = new NpcEditorForm();
+            npcEditorForm.ShowDialog();
         }
     }
 }
