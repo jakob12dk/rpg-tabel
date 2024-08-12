@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using rpg_tabel.Connections;
 using rpg_tabel.GUI;
 using rpg_tabel.Logic;
@@ -26,7 +27,37 @@ namespace rpg_tabel
 
 
 
+        private void LoadNpcNames()
+        {
+            try
+            {
+                string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RPG_Table", "Npcs");
 
+                if (!Directory.Exists(directoryPath))
+                {
+                    MessageBox.Show("NPC directory does not exist.");
+                    return;
+                }
+
+                var xmlFiles = Directory.GetFiles(directoryPath, "*.xml");
+                listNpc.Items.Clear();
+
+                foreach (var file in xmlFiles)
+                {
+                    var doc = XDocument.Load(file);
+                    var npcNameElement = doc.Descendants("Name").FirstOrDefault();
+
+                    if (npcNameElement != null)
+                    {
+                        listNpc.Items.Add(npcNameElement.Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading NPC names: {ex.Message}");
+            }
+        }
 
         private void BtnGenerateName_Click_1(object sender, EventArgs e)
         {
