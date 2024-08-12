@@ -163,9 +163,13 @@ namespace rpg_tabel
             CBNamegerator = new ComboBox();
             LblGenerated = new Label();
             BtnGenerateName = new Button();
+            listNpc = new ListBox();
+            label1 = new Label();
+            BtnNewNpc = new Button();
             SuspendLayout();
-
+            // 
             // btnSearch
+            // 
             btnSearch.Location = new Point(124, 12);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(75, 23);
@@ -173,16 +177,18 @@ namespace rpg_tabel
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
-
+            // 
             // lblConnetion
+            // 
             lblConnetion.AutoSize = true;
             lblConnetion.Location = new Point(15, 16);
             lblConnetion.Name = "lblConnetion";
             lblConnetion.Size = new Size(74, 15);
             lblConnetion.TabIndex = 1;
             lblConnetion.Text = "Searching ....";
-
+            // 
             // btnSettings
+            // 
             btnSettings.Location = new Point(1367, 12);
             btnSettings.Name = "btnSettings";
             btnSettings.Size = new Size(75, 23);
@@ -190,31 +196,51 @@ namespace rpg_tabel
             btnSettings.Text = "Settings";
             btnSettings.UseVisualStyleBackColor = true;
             btnSettings.Click += btnSettings_Click;
-
+            // 
             // LblNamegeratorinfo
+            // 
             LblNamegeratorinfo.AutoSize = true;
             LblNamegeratorinfo.Location = new Point(15, 84);
             LblNamegeratorinfo.Name = "LblNamegeratorinfo";
-            LblNamegeratorinfo.Size = new Size(92, 15);
+            LblNamegeratorinfo.Size = new Size(94, 15);
             LblNamegeratorinfo.TabIndex = 3;
             LblNamegeratorinfo.Text = "Name Generator";
-
+            // 
             // CBNamegerator
-            CBNamegerator.DataSource = Enum.GetValues(typeof(FantasyRace));
+            // 
+            CBNamegerator.DataSource = new FantasyRace[]
+    {
+    FantasyRace.Towns,
+    FantasyRace.Human,
+    FantasyRace.Elf,
+    FantasyRace.Dwarf,
+    FantasyRace.Orc,
+    FantasyRace.Goblin,
+    FantasyRace.Troll,
+    FantasyRace.Halfling,
+    FantasyRace.Dragonborn,
+    FantasyRace.Tiefling,
+    FantasyRace.Gnome,
+    FantasyRace.HalfElf,
+    FantasyRace.HalfOrc
+    };
             CBNamegerator.FormattingEnabled = true;
+            CBNamegerator.Items.AddRange(new object[] { FantasyRace.Towns, FantasyRace.Human, FantasyRace.Elf, FantasyRace.Dwarf, FantasyRace.Orc, FantasyRace.Goblin, FantasyRace.Troll, FantasyRace.Halfling, FantasyRace.Dragonborn, FantasyRace.Tiefling, FantasyRace.Gnome, FantasyRace.HalfElf, FantasyRace.HalfOrc });
             CBNamegerator.Location = new Point(15, 102);
             CBNamegerator.Name = "CBNamegerator";
             CBNamegerator.Size = new Size(121, 23);
             CBNamegerator.TabIndex = 4;
-
+            // 
             // LblGenerated
+            // 
             LblGenerated.AutoSize = true;
             LblGenerated.Location = new Point(18, 136);
             LblGenerated.Name = "LblGenerated";
             LblGenerated.Size = new Size(0, 15);
             LblGenerated.TabIndex = 5;
-
+            // 
             // BtnGenerateName
+            // 
             BtnGenerateName.Location = new Point(14, 154);
             BtnGenerateName.Name = "BtnGenerateName";
             BtnGenerateName.Size = new Size(75, 23);
@@ -222,11 +248,43 @@ namespace rpg_tabel
             BtnGenerateName.Text = "Generate";
             BtnGenerateName.UseVisualStyleBackColor = true;
             BtnGenerateName.Click += BtnGenerateName_Click;
-
+            // 
+            // listNpc
+            // 
+            listNpc.FormattingEnabled = true;
+            listNpc.ItemHeight = 15;
+            listNpc.Location = new Point(1344, 178);
+            listNpc.Name = "listNpc";
+            listNpc.Size = new Size(120, 229);
+            listNpc.TabIndex = 7;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(1344, 154);
+            label1.Name = "label1";
+            label1.Size = new Size(34, 15);
+            label1.TabIndex = 8;
+            label1.Text = "Npcs";
+            // 
+            // BtnNewNpc
+            // 
+            BtnNewNpc.Location = new Point(1344, 413);
+            BtnNewNpc.Name = "BtnNewNpc";
+            BtnNewNpc.Size = new Size(120, 23);
+            BtnNewNpc.TabIndex = 9;
+            BtnNewNpc.Text = "New NPC";
+            BtnNewNpc.UseVisualStyleBackColor = true;
+            BtnNewNpc.Click += BtnNewNpc_Click;
+            // 
             // Main
+            // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1476, 628);
+            Controls.Add(BtnNewNpc);
+            Controls.Add(label1);
+            Controls.Add(listNpc);
             Controls.Add(BtnGenerateName);
             Controls.Add(LblGenerated);
             Controls.Add(CBNamegerator);
@@ -251,5 +309,8 @@ namespace rpg_tabel
 
         // This field is required for the Dispose method to work correctly
         private System.ComponentModel.IContainer components;
+        private ListBox listNpc;
+        private Label label1;
+        private Button BtnNewNpc;
     }
 }
