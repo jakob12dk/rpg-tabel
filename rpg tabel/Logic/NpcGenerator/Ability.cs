@@ -4,9 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace rpg_tabel.Logic.NpcGenerator
+namespace rpg_tabel.Logic.namegenerator.npcs
 {
-    internal class Ability
+    public enum Ability
     {
+        Strength,
+        Dexterity,
+        Constitution,
+        Intelligence,
+        Wisdom,
+        Charisma
     }
 }
+
