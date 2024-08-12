@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace rpg_tabel.Logic.NpcGenerator.NpcGenerator
+namespace rpg_tabel.Logic.NpcGenerator
 {
     public enum Ability
     {

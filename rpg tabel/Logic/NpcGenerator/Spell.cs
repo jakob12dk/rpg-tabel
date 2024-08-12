@@ -1,4 +1,4 @@
-﻿using rpg_tabel.Logic.NpcGenerator.NpcGenerator;
+﻿using rpg_tabel.Logic.NpcGenerator;
 
 namespace rpg_tabel.Logic.namegenerator.npcs
 {

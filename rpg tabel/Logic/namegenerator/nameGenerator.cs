@@ -1,38 +1,59 @@
-﻿using rpg_tabel.Logic.namegenerator.names;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using rpg_tabel.Logic.namegenerator;
+using rpg_tabel.Logic.namegenerator.names;
 
 namespace rpg_tabel.Logic.namegenerator
 {
     public class NameGenerator
     {
-        private readonly INameProvider _nameProvider;
+        private readonly Dictionary<FantasyRace, INameProvider> _nameProviders;
 
-        public NameGenerator(FantasyRace race)
+        public NameGenerator()
         {
-            switch (race)
+            _nameProviders = new Dictionary<FantasyRace, INameProvider>
             {
-                case FantasyRace.Human:
-                    _nameProvider = new HumanNameProvider();
-                    break;
-                case FantasyRace.Elf:
-                    _nameProvider = new ElfNameProvider();
-                    break;
-                // Add cases for other races
-                default:
-                    throw new ArgumentException("Unsupported race");
-            }
+                { FantasyRace.Human, new HumanNameProvider() },
+                { FantasyRace.Elf, new ElfNameProvider() },
+                { FantasyRace.Dwarf, new DwarfNameProvider() },
+                { FantasyRace.Orc, new OrcNameProvider() },
+                { FantasyRace.Goblin, new GoblinNameProvider() },
+                { FantasyRace.Troll, new TrollNameProvider() },
+                { FantasyRace.Halfling, new HalflingNameProvider() },
+                { FantasyRace.Dragonborn, new DragonbornNameProvider() },
+                { FantasyRace.Tiefling, new TieflingNameProvider() },
+                { FantasyRace.Gnome, new GnomeNameProvider() },
+                { FantasyRace.HalfElf, new HalfElfNameProvider() },
+                { FantasyRace.HalfOrc, new HalfOrcNameProvider() },
+                { FantasyRace.Towns, new FantasyTownNameProvider() }
+            };
         }
 
-        public string GenerateName()
+        public string GenerateName(FantasyRace race)
         {
-            var firstNames = _nameProvider.GetFirstNames();
-            var lastNames = _nameProvider.GetLastNames();
+            if (_nameProviders.TryGetValue(race, out var nameProvider))
+            {
+                var firstNames = nameProvider.GetFirstNames();
+                var lastNames = nameProvider.GetLastNames();
 
-            Random random = new Random();
-            string firstName = firstNames[random.Next(firstNames.Count)];
-            string lastName = lastNames[random.Next(lastNames.Count)];
+                if (firstNames.Any() && lastNames.Any())
+                {
+                    var random = new Random();
+                    var randomFirstName = firstNames[random.Next(firstNames.Count)];
+                    var randomLastName = lastNames[random.Next(lastNames.Count)];
 
-            return $"{firstName} {lastName}";
+                    return $"{randomFirstName} {randomLastName}";
+                }
+                else
+                {
+                    return "No names available.";
+                }
+            }
+            else
+            {
+                return "Name provider not found.";
+            }
         }
     }
 }

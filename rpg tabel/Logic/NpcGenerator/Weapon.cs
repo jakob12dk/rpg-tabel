@@ -1,4 +1,4 @@
-﻿namespace rpg_tabel.Logic.NpcGenerator.NpcGenerator
+﻿namespace rpg_tabel.Logic.NpcGenerator
 {
     public enum Weapon
     {

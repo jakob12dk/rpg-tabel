@@ -16,6 +16,7 @@ namespace rpg_tabel
         private readonly SettingsEditor _settingsEditor;
         private readonly UsbSearch _usbSearch;
         private readonly ArduinoConnection _arduinoConnection;
+        private readonly NameGenerator _nameGenerator;
         private string _connectedPortName;
 
         // Dictionary to hold name providers
@@ -29,6 +30,7 @@ namespace rpg_tabel
             _settingsEditor = new SettingsEditor(); // Make sure this path is correct
             _usbSearch = new UsbSearch(_settingsEditor);
             _arduinoConnection = new ArduinoConnection();
+            _nameGenerator = new NameGenerator();
 
             // Initialize name providers
             _nameProviders = new Dictionary<FantasyRace, INameProvider>
@@ -49,7 +51,7 @@ namespace rpg_tabel
             };
 
             // Subscribe to FormClosing event
-            
+            FormClosing += Main_FormClosing;
         }
 
         private async void btnSearch_Click(object sender, EventArgs e)
@@ -101,28 +103,8 @@ namespace rpg_tabel
         {
             if (CBNamegerator.SelectedItem is FantasyRace selectedRace)
             {
-                if (_nameProviders.TryGetValue(selectedRace, out var nameProvider))
-                {
-                    var firstNames = nameProvider.GetFirstNames();
-                    var lastNames = nameProvider.GetLastNames();
-
-                    if (firstNames.Any() && lastNames.Any())
-                    {
-                        var random = new Random();
-                        var randomFirstName = firstNames[random.Next(firstNames.Count)];
-                        var randomLastName = lastNames[random.Next(lastNames.Count)];
-
-                        LblGenerated.Text = $"{randomFirstName} {randomLastName}";
-                    }
-                    else
-                    {
-                        LblGenerated.Text = "No names available.";
-                    }
-                }
-                else
-                {
-                    LblGenerated.Text = "Name provider not found.";
-                }
+                var generatedName = _nameGenerator.GenerateName(selectedRace);
+                LblGenerated.Text = generatedName;
             }
             else
             {
@@ -208,24 +190,8 @@ namespace rpg_tabel
             // 
             // CBNamegerator
             // 
-            CBNamegerator.DataSource = new FantasyRace[]
-    {
-    FantasyRace.Towns,
-    FantasyRace.Human,
-    FantasyRace.Elf,
-    FantasyRace.Dwarf,
-    FantasyRace.Orc,
-    FantasyRace.Goblin,
-    FantasyRace.Troll,
-    FantasyRace.Halfling,
-    FantasyRace.Dragonborn,
-    FantasyRace.Tiefling,
-    FantasyRace.Gnome,
-    FantasyRace.HalfElf,
-    FantasyRace.HalfOrc
-    };
+            CBNamegerator.DataSource = Enum.GetValues(typeof(FantasyRace)).Cast<FantasyRace>().ToList();
             CBNamegerator.FormattingEnabled = true;
-            CBNamegerator.Items.AddRange(new object[] { FantasyRace.Towns, FantasyRace.Human, FantasyRace.Elf, FantasyRace.Dwarf, FantasyRace.Orc, FantasyRace.Goblin, FantasyRace.Troll, FantasyRace.Halfling, FantasyRace.Dragonborn, FantasyRace.Tiefling, FantasyRace.Gnome, FantasyRace.HalfElf, FantasyRace.HalfOrc });
             CBNamegerator.Location = new Point(15, 102);
             CBNamegerator.Name = "CBNamegerator";
             CBNamegerator.Size = new Size(121, 23);
