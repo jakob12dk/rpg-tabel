@@ -1,4 +1,4 @@
-﻿namespace rpg_tabel.Logic.namegenerator.npcs
+﻿namespace rpg_tabel.Logic.NpcGenerator.NpcGenerator
 {
     public enum Armor
     {
