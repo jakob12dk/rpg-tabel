@@ -157,6 +157,7 @@ namespace rpg_tabel
             BtnNewNpc = new Button();
             listArduinoMethods = new ListBox();
             btnLoadMethods = new Button();
+            BtnSessionNotes = new Button();
             SuspendLayout();
             // 
             // btnSearch
@@ -287,11 +288,22 @@ namespace rpg_tabel
             btnLoadMethods.Text = "Load Methods";
             btnLoadMethods.Click += btnLoadMethods_Click;
             // 
+            // BtnSessionNotes
+            // 
+            BtnSessionNotes.Location = new Point(1344, 128);
+            BtnSessionNotes.Name = "BtnSessionNotes";
+            BtnSessionNotes.Size = new Size(98, 23);
+            BtnSessionNotes.TabIndex = 10;
+            BtnSessionNotes.Text = "SessionNotes";
+            BtnSessionNotes.UseVisualStyleBackColor = true;
+            BtnSessionNotes.Click += BtnSessionNotes_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1476, 628);
+            Controls.Add(BtnSessionNotes);
             Controls.Add(listArduinoMethods);
             Controls.Add(btnLoadMethods);
             Controls.Add(BtnNewNpc);
@@ -309,7 +321,6 @@ namespace rpg_tabel
             WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
-            LoadNpcNames();
         }
 
         private Button btnSearch;
@@ -326,6 +337,7 @@ namespace rpg_tabel
         private Label label1;
         private Button BtnNewNpc;
         private Button btnLoadMethods;
+        private Button BtnSessionNotes;
 
         // Add this method to load NPC names into the listNpc ListBox (implementation will depend on where the NPC data is coming from)
 

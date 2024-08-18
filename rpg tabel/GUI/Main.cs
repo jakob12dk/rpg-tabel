@@ -201,5 +201,10 @@ namespace rpg_tabel
             }
         }
 
+        private void BtnSessionNotes_Click(object sender, EventArgs e)
+        {
+            var sessionNoteForm = new SessionNoteForm();
+            sessionNoteForm.ShowDialog();
+        }
     }
 }
