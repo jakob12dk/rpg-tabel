@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using rpg_tabel.Connections; // Ensure this namespace is correct
+using rpg_tabel.Connections;
 using rpg_tabel.GUI;
 using rpg_tabel.Logic;
 using rpg_tabel.Logic.namegenerator;
-using rpg_tabel.Logic.namegenerator.names; // Ensure this namespace is correct
+using rpg_tabel.Logic.namegenerator.names;
 
 namespace rpg_tabel
 {
@@ -18,6 +19,7 @@ namespace rpg_tabel
         private readonly ArduinoConnection _arduinoConnection;
         private readonly NameGenerator _nameGenerator;
         private string _connectedPortName;
+        private ListBox listArduinoMethods;
 
         // Dictionary to hold name providers
         private readonly Dictionary<FantasyRace, INameProvider> _nameProviders;
@@ -27,7 +29,7 @@ namespace rpg_tabel
             InitializeComponent();
 
             // Initialize dependencies
-            _settingsEditor = new SettingsEditor(); // Make sure this path is correct
+            _settingsEditor = new SettingsEditor();
             _usbSearch = new UsbSearch(_settingsEditor);
             _arduinoConnection = new ArduinoConnection();
             _nameGenerator = new NameGenerator();
@@ -54,51 +56,51 @@ namespace rpg_tabel
             FormClosing += Main_FormClosing;
         }
 
+        // Event handler for the Search button
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             lblConnetion.Text = "Searching...";
             btnSearch.Enabled = false;
 
-            var devices = await Task.Run(() => _usbSearch.FindArduinoDevices());
-
-            if (devices.Count > 0)
+            try
             {
-                lblConnetion.Text = devices.Count == 1 ? "Found" : "Multiple devices found";
-                if (devices.Count > 1)
-                {
-                    var devicesListForm = new DevicesListForm(devices);
-                    devicesListForm.ShowDialog();
+                // Find devices asynchronously
+                List<string> devices = await Task.Run(() => _usbSearch.FindArduinoDevices());
 
-                    string selectedDevicePort = GetSelectedPortFromUser();
-                    if (!string.IsNullOrEmpty(selectedDevicePort))
-                    {
-                        _connectedPortName = selectedDevicePort;
-                        _arduinoConnection.Connect(_connectedPortName);
-                    }
+                if (devices != null && devices.Count > 0)
+                {
+                    lblConnetion.Text = "Device Found";
+                    _connectedPortName = devices.First();
+
+                    // Attempt to connect to the found device
+                    _arduinoConnection.Connect(_connectedPortName);
+                    lblConnetion.Text = $"Connected to {_connectedPortName}";
                 }
                 else
                 {
-                    _connectedPortName = GetPortNameFromDevice(devices.First());
-                    if (!string.IsNullOrEmpty(_connectedPortName))
-                    {
-                        _arduinoConnection.Connect(_connectedPortName);
-                    }
+                    lblConnetion.Text = "No devices found";
                 }
             }
-            else
+            catch (Exception ex)
             {
-                lblConnetion.Text = "No devices found";
+                lblConnetion.Text = $"Error: {ex.Message}";
             }
-
-            btnSearch.Enabled = true;
+            finally
+            {
+                btnSearch.Enabled = true;
+            }
         }
 
+
+
+        // Event handler for the Settings button
         private void btnSettings_Click(object sender, EventArgs e)
         {
             var settingsForm = new SettingsTableForm(_settingsEditor.GetAllSettings());
             settingsForm.ShowDialog();
         }
 
+        // Event handler for the Generate Name button
         private void BtnGenerateName_Click(object sender, EventArgs e)
         {
             if (CBNamegerator.SelectedItem is FantasyRace selectedRace)
@@ -112,21 +114,25 @@ namespace rpg_tabel
             }
         }
 
+        // Method to simulate getting the selected COM port from the user
         private string GetSelectedPortFromUser()
         {
             return "COM3"; // Example implementation
         }
 
+        // Method to simulate getting the port name from a device
         private string GetPortNameFromDevice(string device)
         {
             return "COM3"; // Example implementation
         }
 
+        // Event handler for the FormClosing event
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             _arduinoConnection.Disconnect();
         }
 
+        // Dispose method
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -136,6 +142,7 @@ namespace rpg_tabel
             base.Dispose(disposing);
         }
 
+        // Initialize the UI components
         private void InitializeComponent()
         {
             btnSearch = new Button();
@@ -148,11 +155,13 @@ namespace rpg_tabel
             listNpc = new ListBox();
             label1 = new Label();
             BtnNewNpc = new Button();
+            listArduinoMethods = new ListBox();
+            btnLoadMethods = new Button();
             SuspendLayout();
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(124, 12);
+            btnSearch.Location = new Point(202, 12);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(75, 23);
             btnSearch.TabIndex = 0;
@@ -190,12 +199,28 @@ namespace rpg_tabel
             // 
             // CBNamegerator
             // 
+            CBNamegerator.DataSource = new FantasyRace[]
+    {
+    FantasyRace.Towns,
+    FantasyRace.Human,
+    FantasyRace.Elf,
+    FantasyRace.Dwarf,
+    FantasyRace.Orc,
+    FantasyRace.Goblin,
+    FantasyRace.Troll,
+    FantasyRace.Halfling,
+    FantasyRace.Dragonborn,
+    FantasyRace.Tiefling,
+    FantasyRace.Gnome,
+    FantasyRace.HalfElf,
+    FantasyRace.HalfOrc
+    };
             CBNamegerator.FormattingEnabled = true;
+            CBNamegerator.DataSource = Enum.GetValues(typeof(FantasyRace));
             CBNamegerator.Location = new Point(15, 102);
             CBNamegerator.Name = "CBNamegerator";
             CBNamegerator.Size = new Size(121, 23);
             CBNamegerator.TabIndex = 4;
-            CBNamegerator.DataSource = Enum.GetValues(typeof(FantasyRace));
             // 
             // LblGenerated
             // 
@@ -244,11 +269,31 @@ namespace rpg_tabel
             BtnNewNpc.UseVisualStyleBackColor = true;
             BtnNewNpc.Click += BtnNewNpc_Click;
             // 
+            // listArduinoMethods
+            // 
+            listArduinoMethods.ItemHeight = 15;
+            listArduinoMethods.Location = new Point(15, 200);
+            listArduinoMethods.Name = "listArduinoMethods";
+            listArduinoMethods.Size = new Size(200, 139);
+            listArduinoMethods.TabIndex = 0;
+            listArduinoMethods.SelectedIndexChanged += ListArduinoMethods_SelectedIndexChanged;
+            // 
+            // btnLoadMethods
+            // 
+            btnLoadMethods.Location = new Point(15, 370);
+            btnLoadMethods.Name = "btnLoadMethods";
+            btnLoadMethods.Size = new Size(100, 30);
+            btnLoadMethods.TabIndex = 1;
+            btnLoadMethods.Text = "Load Methods";
+            btnLoadMethods.Click += btnLoadMethods_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1476, 628);
+            Controls.Add(listArduinoMethods);
+            Controls.Add(btnLoadMethods);
             Controls.Add(BtnNewNpc);
             Controls.Add(label1);
             Controls.Add(listNpc);
@@ -280,5 +325,9 @@ namespace rpg_tabel
         private ListBox listNpc;
         private Label label1;
         private Button BtnNewNpc;
+        private Button btnLoadMethods;
+
+        // Add this method to load NPC names into the listNpc ListBox (implementation will depend on where the NPC data is coming from)
+
     }
 }

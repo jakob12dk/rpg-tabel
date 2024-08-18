@@ -3,49 +3,64 @@ using System.IO.Ports;
 
 namespace rpg_tabel.Connections
 {
-    public class ArduinoConnection : IDisposable
+    public class ArduinoConnection
     {
         private SerialPort _serialPort;
 
-        // Connect to Arduino with a specified port and baud rate
-        public bool Connect(string portName, int baudRate = 9600)
+        public bool IsConnected => _serialPort != null && _serialPort.IsOpen;
+
+        public ArduinoConnection()
+        {
+            _serialPort = new SerialPort();
+        }
+
+        public void Connect(string portName)
         {
             try
             {
-                if (_serialPort != null && _serialPort.IsOpen)
+                if (_serialPort.IsOpen)
                 {
-                    // Already connected
-                    return true;
+                    _serialPort.Close();
                 }
 
-                _serialPort = new SerialPort(portName, baudRate);
+                _serialPort.PortName = portName;
+                _serialPort.BaudRate = 9600;
                 _serialPort.Open();
-                return _serialPort.IsOpen;
+                Console.WriteLine($"Connected to Arduino on {portName}");
             }
             catch (Exception ex)
             {
-                // Log or handle the exception
-                Console.WriteLine($"Error connecting to Arduino: {ex.Message}");
-                return false;
+                throw new InvalidOperationException($"Failed to connect to {portName}: {ex.Message}", ex);
             }
         }
 
-        // Disconnect from Arduino
         public void Disconnect()
         {
-            if (_serialPort != null && _serialPort.IsOpen)
+            if (_serialPort.IsOpen)
             {
                 _serialPort.Close();
-                _serialPort.Dispose();
-                _serialPort = null; // Ensure the serial port is no longer referenced
+                Console.WriteLine("Disconnected from Arduino.");
             }
         }
 
-        // Implement IDisposable to ensure proper cleanup
-        public void Dispose()
+        public string[] GetAvailableMethods()
         {
-            Disconnect(); // Ensure that resources are cleaned up
-            GC.SuppressFinalize(this); // Suppress finalization
+            if (!IsConnected)
+                throw new InvalidOperationException("Not connected to Arduino.");
+
+            _serialPort.WriteLine("METHODS"); // Command to request available methods
+            System.Threading.Thread.Sleep(500); // Wait for Arduino to respond
+
+            var response = _serialPort.ReadExisting();
+            return response.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public void CallMethod(string methodName)
+        {
+            if (!IsConnected)
+                throw new InvalidOperationException("Not connected to Arduino.");
+
+            _serialPort.WriteLine(methodName);
         }
     }
 }

@@ -160,6 +160,46 @@ namespace rpg_tabel
                 MessageBox.Show($"Error opening NPC editor: {ex.Message}");
             }
         }
+        private async void btnLoadMethods_Click(object sender, EventArgs e)
+        {
+            if (_arduinoConnection == null || !_arduinoConnection.IsConnected)
+            {
+                MessageBox.Show("Not connected to Arduino.");
+                return;
+            }
+
+            try
+            {
+                var methods = await Task.Run(() => _arduinoConnection.GetAvailableMethods());
+
+                listArduinoMethods.Items.Clear();
+                foreach (var method in methods)
+                {
+                    listArduinoMethods.Items.Add(method);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving methods: {ex.Message}");
+            }
+        }
+
+        private void ListArduinoMethods_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listArduinoMethods.SelectedItem != null)
+            {
+                string selectedMethod = listArduinoMethods.SelectedItem.ToString();
+                try
+                {
+                    _arduinoConnection.CallMethod(selectedMethod);
+                    MessageBox.Show($"Called method: {selectedMethod}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error calling method: {ex.Message}");
+                }
+            }
+        }
 
     }
 }

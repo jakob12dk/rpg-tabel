@@ -33,6 +33,7 @@ namespace rpg_tabel.GUI
             _npcDataTable.Columns.Add("Value", typeof(string));
 
             dataGridViewNpc.DataSource = _npcDataTable;
+            dataGridViewNpc.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void PopulateNpcData(NPC npc)
