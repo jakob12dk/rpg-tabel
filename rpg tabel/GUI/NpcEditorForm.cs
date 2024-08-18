@@ -15,10 +15,15 @@ namespace rpg_tabel.GUI
         private DataTable _npcDataTable;
         private NPC _npc;
 
-        public NpcEditorForm()
+        public NpcEditorForm(NPC? npc = null)
         {
+            _npc = npc;
             InitializeComponent();
             InitializeNpcDataTable();
+            if (_npc != null)
+            {
+                PopulateNpcData(_npc);
+            }
         }
 
         private void InitializeNpcDataTable()
@@ -62,7 +67,7 @@ namespace rpg_tabel.GUI
         private void BtnGenerate_Click(object sender, EventArgs e)
         {
             var npcGenerator = new NpcGenerator(new NameGenerator());
-            _npc = npcGenerator.GenerateNpc("Generated Name");
+            _npc = npcGenerator.GenerateNpc();
 
             // Example of setting additional properties
             _npc.Personality = "Brave and honorable.";

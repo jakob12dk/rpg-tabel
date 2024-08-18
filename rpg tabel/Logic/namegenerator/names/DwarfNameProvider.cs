@@ -68,23 +68,40 @@ namespace rpg_tabel.Logic.namegenerator.names
         {
             try
             {
+                // Define a list of 100 first names
+                var firstNames = new[]
+                {
+            "Borin", "Dori", "Thrain", "Kili", "Gimli", "Balin", "Oin", "Gloin", "Farin", "Dwalin",
+            "Bofur", "Bombur", "Dain", "Thorin", "Grimli", "Krag", "Nori", "Ori", "Rurik", "Drog",
+            "Keldor", "Brogar", "Harn", "Grogan", "Thark", "Kragan", "Rurik", "Varg", "Thrain", "Nar",
+            "Grim", "Borin", "Einar", "Farin", "Marn", "Rorik", "Grun", "Jorik", "Korin", "Haldor",
+            "Bjar", "Harkin", "Goran", "Lodin", "Korin", "Harik", "Bodvar", "Torin", "Thar", "Rokar",
+            "Myr", "Sten", "Dorrin", "Hjor", "Brok", "Torr", "Gorrim", "Kragor", "Derrik", "Sorin",
+            "Kaldur", "Rond", "Grimbold", "Haldar", "Thorin", "Krond", "Baldor", "Gorim", "Mord", "Berg",
+            "Ragnor", "Halgar", "Throk", "Vorn", "Lund", "Baldric", "Rorin", "Gorm", "Haldon", "Tarl",
+            "Bram", "Thorik", "Thorr", "Drek", "Yar", "Naldor", "Bren", "Thorim", "Hrogar", "Keldor"
+        };
+
+                // Define a list of 100 last names
+                var lastNames = new[]
+                {
+            "Ironfist", "Stonefoot", "Hammerbeard", "Bronzebeard", "Forgehammer", "Grimforge", "Oakenshield", "Dwarfson", "Stoneheart", "Thunderfist",
+            "Blackstone", "Anvilhammer", "Steelclad", "Brassforge", "Deepdelver", "Stonehelm", "Goldgrip", "Rockshear", "Ironbane", "Frostbeard",
+            "Rockfist", "Grimstone", "Stormbreaker", "Ironshield", "Fireforge", "Gritstone", "Earthshaker", "Dwarfhammer", "Trollbane", "Stonegrip",
+            "Emberforge", "Stormhelm", "Steelbeard", "Thunderridge", "Goldforge", "Deepstone", "Frostforge", "Ragefist", "Ironfist", "Dwarfson", "Rook",
+            "Bronzeshield", "Rockforge", "Grimhelm", "Thundermane", "Ironheart", "Blackforge", "Ravenstone", "Flameforge", "Stonebane", "Deepforge",
+            "Ironthorn", "Stonebrand", "Frosthelm", "Gritforge", "Thunderstone", "Firestone", "Grimhammer", "Forgeheart", "Stonehelm", "Stormstone",
+            "Brassbeard", "Firefist", "Emberstone", "Goldbeard", "Rockhelm", "Rageforge", "Ironstone", "Dwarfhelm", "Steelstone", "Froststone",
+            "Grimbeard", "Deepforge", "Flameheart", "Stormforge", "Bronzeheart", "Grimshield", "Ironhelm", "Thunderforge", "Stonehammer", "Goldstone"
+        };
+
                 var doc = new XDocument(
                     new XElement("Names",
                         new XElement("FirstNames",
-                            new XElement("Name", "Borin"),
-                            new XElement("Name", "Dori"),
-                            new XElement("Name", "Thrain"),
-                            new XElement("Name", "Kili"),
-                            new XElement("Name", "Gimli")
-                        // Add more default first names here
+                            firstNames.Select(name => new XElement("Name", name))
                         ),
                         new XElement("LastNames",
-                            new XElement("Name", "Ironfist"),
-                            new XElement("Name", "Stonefoot"),
-                            new XElement("Name", "Hammerbeard"),
-                            new XElement("Name", "Bronzebeard"),
-                            new XElement("Name", "Forgehammer")
-                        // Add more default last names here
+                            lastNames.Select(name => new XElement("Name", name))
                         )
                     )
                 );
@@ -100,4 +117,3 @@ namespace rpg_tabel.Logic.namegenerator.names
             }
         }
     }
-}

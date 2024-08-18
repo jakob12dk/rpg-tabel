@@ -65,23 +65,40 @@ namespace rpg_tabel.Logic.namegenerator.names
         {
             try
             {
+                // Define a list of 100 first names
+                var firstNames = new[]
+                {
+                    "Legolas", "Arwen", "Elrond", "Galadriel", "Thranduil", "Erestor", "Celeborn", "Gandalf", "Lúthien", "Idril",
+                    "Finrod", "Fingolfin", "Turgon", "Gwindor", "Gildor", "Haldir", "Eöl", "Círdan", "Aredhel", "Maeglin",
+                    "Glorfindel", "Nimrodel", "Oropher", "Eöl", "Lindir", "Amras", "Amrod", "Curufin", "Celegorm", "Rúmil",
+                    "Fëanor", "Húrin", "Melian", "Finduilas", "Lúthien", "Lórien", "Míriel", "Nerdanel", "Varda", "Yavanna",
+                    "Eönwë", "Taniquetil", "Galadrielle", "Eruanna", "Galandriel", "Eowyn", "Finarfin", "Eldar", "Ailin", "Aranel",
+                    "Arathorn", "Galdor", "Gondor", "Faramir", "Eldarion", "Arweniel", "Eldor", "Elanor", "Elendir", "Elostirion",
+                    "Lorien", "Elme", "Maeron", "Lúthion", "Gondoriel", "Fíriel", "Eru", "Eldarion", "Elwen", "Galadorn",
+                    "Arathor", "Isildur", "Eldarion", "Haldor", "Gweneth", "Melwas", "Finrodiel", "Aulë", "Yavannamírë", "Lúthien"
+                };
+
+                // Define a list of 100 last names
+                var lastNames = new[]
+                {
+                    "Greenleaf", "Evenstar", "Halfelven", "Stormcrow", "Moonshadow", "Silvermoon", "Starfire", "Brightblade", "Shadowfax", "Swiftfoot",
+                    "Highborn", "Winterlight", "Starwind", "Frostleaf", "Dewfall", "Dawnblade", "Sunshadow", "Dreamweaver", "Skywalker", "Windrider",
+                    "Gildedleaf", "Sunfire", "Shadowmoon", "Starflame", "Moonlight", "Brightstar", "Eagleclaw", "Nightfall", "Dewwind", "Winterstone",
+                    "Crystalheart", "Silverleaf", "Frostwind", "Shadowdancer", "Sunrise", "Starshine", "Moonbeam", "Brightmoon", "Silverstar", "Eagleeye",
+                    "Dawnstar", "Snowfall", "Starflame", "Silvershadow", "Wintermoon", "Gildedmoon", "Sunflare", "Shadowlight", "Windstorm", "Skyfire",
+                    "Nightwind", "Dewstone", "Brightwind", "Crystalmoon", "Frostflame", "Eagleblade", "Sunbeam", "Dewmoon", "Winterflare", "Starwind",
+                    "Moonshadow", "Snowstorm", "Crystalflare", "Brightlight", "Gildedstar", "Shadowfire", "Winterdawn", "Eaglewind", "Sunlight", "Starshadow",
+                    "Frostblade", "Dewshine", "Brightstone", "Silversun", "Eagleflare", "Shadowstar", "Winterwind", "Moonflare", "Crystalstar", "Sunstorm",
+                    "Gildedshadow", "Nightstar", "Brightshadow", "Dewlight", "Silverwind", "Frostheart", "Gildedwind", "Moonfire", "Eaglemoon", "Snowflake"
+                };
+
                 var doc = new XDocument(
                     new XElement("Names",
                         new XElement("FirstNames",
-                            new XElement("Name", "Legolas"),
-                            new XElement("Name", "Arwen"),
-                            new XElement("Name", "Elrond"),
-                            new XElement("Name", "Galadriel"),
-                            new XElement("Name", "Thranduil")
-                        // Add more default elf first names here
+                            firstNames.Select(name => new XElement("Name", name))
                         ),
                         new XElement("LastNames",
-                            new XElement("Name", "Greenleaf"),
-                            new XElement("Name", "Evenstar"),
-                            new XElement("Name", "Halfelven"),
-                            new XElement("Name", "Stormcrow"),
-                            new XElement("Name", "Moonshadow")
-                        // Add more default elf last names here
+                            lastNames.Select(name => new XElement("Name", name))
                         )
                     )
                 );

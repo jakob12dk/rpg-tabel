@@ -68,23 +68,40 @@ namespace rpg_tabel.Logic.namegenerator.names
         {
             try
             {
+                // Define a list of 100 first names
+                var firstNames = new[]
+                {
+            "Arjhan", "Balasar", "Drogon", "Kava", "Mehen", "Rathos", "Zarvok", "Karn", "Yarvok", "Tharion",
+            "Orin", "Volar", "Kethar", "Merrik", "Talos", "Drakar", "Korath", "Gorin", "Falan", "Jorik",
+            "Varek", "Harth", "Kron", "Rengar", "Talon", "Vorik", "Grimor", "Marek", "Koran", "Varric",
+            "Larik", "Zorin", "Tarek", "Ragan", "Morth", "Khalis", "Zaric", "Haar", "Karth", "Rokar",
+            "Gorath", "Varek", "Draken", "Shor", "Rovan", "Toran", "Valin", "Zorath", "Kral", "Thorin",
+            "Narek", "Galar", "Kaldor", "Rorik", "Vorn", "Kavak", "Malthor", "Theron", "Varis", "Doran",
+            "Brax", "Druan", "Jorath", "Eldrin", "Raxos", "Garr", "Thorik", "Haldor", "Narek", "Rorik",
+            "Vorath", "Varn", "Aldrin", "Zarion", "Rurik", "Varak", "Galan", "Harkin", "Neric", "Korin"
+        };
+
+                // Define a list of 100 last names
+                var lastNames = new[]
+                {
+            "Tharashk", "Krin", "Khar", "Varyx", "Rhasha", "Drakon", "Grimblade", "Ironfist", "Stormheart", "Frostclaw",
+            "Steelwind", "Thunderstrike", "Bloodfang", "Darkflame", "Firestorm", "Shadowbane", "Stormbringer", "Ravencrest", "Stonefist", "Gloomrider", "Moonshadow",
+            "Dragonfire", "Goldscale", "Nightstalker", "Ironclaw", "Sunblade", "Wolfbane", "Brightforge", "Stormrider", "Duskfall", "Winterbloom",
+            "Silverwind", "Bloodstone", "Darkthorn", "Emberforge", "Ironbark", "Starfire", "Wraithblade", "Frostfang", "Fireclaw", "Thunderclap", "Shadowstrike",
+            "Stormbreaker", "Dragoncrest", "Moonfury", "Steelheart", "Winterborn", "Stonecrusher", "Sunshard", "Nightfire", "Bloodmoon", "Ironfang",
+            "Emberstorm", "Stormclaw", "Darkfire", "Frostbane", "Silverfang", "Bloodstorm", "Shadowflame", "Goldheart", "Nightblade", "Sunflare", "Moonstone",
+            "Ironshadow", "Fireclaw", "Stoneforge", "Stormfang", "Frostfire", "Shadowflame", "Moonblade", "Darkstorm", "Emberclaw", "Thunderheart", "Dragonshadow",
+            "Winterfire", "Steelshadow", "Bloodflare", "Nightstorm", "Frostheart", "Stormmoon", "Shadowfang", "Ironstorm", "Emberblade", "Moonflare", "Fireheart",
+            "Darkfang", "Sunstone", "Silverstorm", "Nightshade", "Frostshadow", "Thunderblade", "Stormshadow", "Bloodflare", "Shadowmoon", "Ironstorm"
+        };
+
                 var doc = new XDocument(
                     new XElement("Names",
                         new XElement("FirstNames",
-                            new XElement("Name", "Arjhan"),
-                            new XElement("Name", "Balasar"),
-                            new XElement("Name", "Drogon"),
-                            new XElement("Name", "Kava"),
-                            new XElement("Name", "Mehen")
-                        // Add more default first names here
+                            firstNames.Select(name => new XElement("Name", name))
                         ),
                         new XElement("LastNames",
-                            new XElement("Name", "Tharashk"),
-                            new XElement("Name", "Krin"),
-                            new XElement("Name", "Khar"),
-                            new XElement("Name", "Varyx"),
-                            new XElement("Name", "Rhasha")
-                        // Add more default last names here
+                            lastNames.Select(name => new XElement("Name", name))
                         )
                     )
                 );
