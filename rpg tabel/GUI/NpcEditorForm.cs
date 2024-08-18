@@ -15,10 +15,15 @@ namespace rpg_tabel.GUI
         private DataTable _npcDataTable;
         private NPC _npc;
 
-        public NpcEditorForm()
+        public NpcEditorForm(NPC? npc = null)
         {
+            _npc = npc;
             InitializeComponent();
             InitializeNpcDataTable();
+            if (_npc != null)
+            {
+                PopulateNpcData(_npc);
+            }
         }
 
         private void InitializeNpcDataTable()

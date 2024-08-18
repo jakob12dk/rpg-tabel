@@ -190,12 +190,12 @@ namespace rpg_tabel
             // 
             // CBNamegerator
             // 
-            CBNamegerator.DataSource = Enum.GetValues(typeof(FantasyRace)).Cast<FantasyRace>().ToList();
             CBNamegerator.FormattingEnabled = true;
             CBNamegerator.Location = new Point(15, 102);
             CBNamegerator.Name = "CBNamegerator";
             CBNamegerator.Size = new Size(121, 23);
             CBNamegerator.TabIndex = 4;
+            CBNamegerator.DataSource = Enum.GetValues(typeof(FantasyRace));
             // 
             // LblGenerated
             // 
@@ -223,7 +223,7 @@ namespace rpg_tabel
             listNpc.Name = "listNpc";
             listNpc.Size = new Size(120, 229);
             listNpc.TabIndex = 7;
-            
+            listNpc.SelectedIndexChanged += listNpc_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -265,7 +265,6 @@ namespace rpg_tabel
             ResumeLayout(false);
             PerformLayout();
             LoadNpcNames();
-            
         }
 
         private Button btnSearch;
