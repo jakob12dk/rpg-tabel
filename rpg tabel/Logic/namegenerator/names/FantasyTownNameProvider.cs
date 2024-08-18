@@ -30,11 +30,13 @@ namespace rpg_tabel.Logic.namegenerator.names
 
         public List<string> GetFirstNames()
         {
+            // Fantasy towns typically don't have separate first and last names, so return the same list
             return LoadNames("FirstNames");
         }
 
         public List<string> GetLastNames()
         {
+            // Fantasy towns typically don't have separate first and last names, so return the same list
             return LoadNames("LastNames");
         }
 
@@ -98,8 +100,8 @@ namespace rpg_tabel.Logic.namegenerator.names
             {
                 "Alder", "Briar", "Cedar", "Dew", "Elm", "Frost", "Glen", "Hollow", "Ivy", "Jade",
                 "Kirk", "Lynx", "Moss", "Nettle", "Orchard", "Pine", "Quill", "Rose", "Stone", "Thorn",
-                "Umber", "Vale", "Willow", "Yew", "Zephyr"
-                // Add more base names here
+                "Umber", "Vale", "Willow", "Yew", "Zephyr",
+                // Add more base names if needed
             };
 
             var random = new Random();
@@ -119,7 +121,8 @@ namespace rpg_tabel.Logic.namegenerator.names
             var prefix = baseNames[random.Next(baseNames.Count)];
             var suffix = baseNames[random.Next(baseNames.Count)];
 
-            return $"{prefix}{suffix}"; // Combine prefix and suffix to form a town name
+            // Optionally, you can add some separator or make it more complex
+            return $"{prefix}{suffix}";
         }
     }
 }

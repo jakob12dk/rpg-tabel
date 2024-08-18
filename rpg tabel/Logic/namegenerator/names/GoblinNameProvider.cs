@@ -13,7 +13,7 @@ namespace rpg_tabel.Logic.namegenerator.names
         public GoblinNameProvider()
         {
             // Set the file path to Documents/RPG_Table/Tabels/Names/Goblin/GoblinNames.xml
-            string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RPG_Table", "Tabels", "Names");
+            string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RPG_Table", "Tabels", "Names", "Goblin");
             _filePath = Path.Combine(directoryPath, "GoblinNames.xml");
 
             // Ensure the directory and file exist, if not, create them
@@ -71,20 +71,58 @@ namespace rpg_tabel.Logic.namegenerator.names
                 var doc = new XDocument(
                     new XElement("Names",
                         new XElement("FirstNames",
-                            new XElement("Name", "Grizzle"),
-                            new XElement("Name", "Snaggle"),
-                            new XElement("Name", "Bark"),
-                            new XElement("Name", "Mog"),
-                            new XElement("Name", "Zog")
-                        // Add more default first names here
+                            GenerateNameElements(new[]
+                            {
+                                "Grizzle", "Snaggle", "Bark", "Mog", "Zog",
+                                "Ruk", "Blagg", "Skrunt", "Glim", "Nok",
+                                "Drek", "Skarn", "Krag", "Murl", "Trog",
+                                "Zar", "Bort", "Nok", "Grub", "Mork",
+                                "Dug", "Frog", "Rug", "Gnar", "Zerk",
+                                "Krosh", "Drog", "Fling", "Rask", "Brug",
+                                "Zrek", "Jurk", "Krog", "Skrag", "Zug",
+                                "Murk", "Fang", "Ruk", "Blix", "Grum",
+                                "Trog", "Brak", "Warr", "Lug", "Zig",
+                                "Dorg", "Kruk", "Mog", "Skulk", "Brak",
+                                "Gorp", "Zok", "Zarg", "Drek", "Blak",
+                                "Razz", "Trek", "Skrunk", "Wok", "Nork",
+                                "Ruk", "Skazz", "Grok", "Trog", "Gragg",
+                                "Krak", "Snag", "Mog", "Ruk", "Zogg"
+                            }),
+                            GenerateNameElements(new[]
+                            {
+                                "Snot", "Gnar", "Stinkfoot", "Skulk", "Razor",
+                                "Blight", "Gnash", "Muck", "Scrap", "Tusk",
+                                "Crank", "Grub", "Moss", "Dreg", "Gloom",
+                                "Stink", "Muck", "Fester", "Rime", "Ruck",
+                                "Skulk", "Vile", "Zik", "Rubble", "Murk",
+                                "Grim", "Hag", "Scum", "Spite", "Drek",
+                                "Stomp", "Scrag", "Gnarl", "Rubbish", "Bane",
+                                "Sputter", "Moss", "Gristle", "Krunk", "Crust",
+                                "Vile", "Grub", "Skrunch", "Murk", "Scum",
+                                "Grizzle", "Bork", "Ruck", "Squeak", "Dreg",
+                                "Gnar", "Scrap", "Thorn", "Gloam", "Grind",
+                                "Krag", "Gnash", "Ruk", "Fester", "Gloom",
+                                "Moss", "Rime", "Zog", "Rubble", "Skit"
+                            })
                         ),
                         new XElement("LastNames",
-                            new XElement("Name", "Snot"),
-                            new XElement("Name", "Gnar"),
-                            new XElement("Name", "Stinkfoot"),
-                            new XElement("Name", "Skulk"),
-                            new XElement("Name", "Razor")
-                        // Add more default last names here
+                            GenerateNameElements(new[]
+                            {
+                                "Snot", "Gnar", "Stinkfoot", "Skulk", "Razor",
+                                "Blight", "Gnash", "Muck", "Scrap", "Tusk",
+                                "Crank", "Grub", "Moss", "Dreg", "Gloom",
+                                "Stink", "Muck", "Fester", "Rime", "Ruck",
+                                "Skulk", "Vile", "Zik", "Rubble", "Murk",
+                                "Grim", "Hag", "Scum", "Spite", "Drek",
+                                "Stomp", "Scrag", "Gnarl", "Rubbish", "Bane",
+                                "Sputter", "Moss", "Gristle", "Krunk", "Crust",
+                                "Vile", "Grub", "Skrunch", "Murk", "Scum",
+                                "Grizzle", "Bork", "Ruck", "Squeak", "Dreg",
+                                "Gnar", "Scrap", "Thorn", "Gloam", "Grind",
+                                "Krag", "Gnash", "Ruk", "Fester", "Gloom",
+                                "Moss", "Rime", "Zog", "Rubble", "Skit",
+                                "Scrap", "Gloom", "Thorn", "Rime", "Zik"
+                            })
                         )
                     )
                 );
@@ -98,6 +136,11 @@ namespace rpg_tabel.Logic.namegenerator.names
             {
                 Console.WriteLine($"Error creating default GoblinNames.xml file: {ex.Message}");
             }
+        }
+
+        private IEnumerable<XElement> GenerateNameElements(IEnumerable<string> names)
+        {
+            return names.Select(name => new XElement("Name", name));
         }
     }
 }

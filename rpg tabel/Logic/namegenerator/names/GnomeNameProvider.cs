@@ -13,7 +13,7 @@ namespace rpg_tabel.Logic.namegenerator.names
         public GnomeNameProvider()
         {
             // Set the file path to Documents/RPG_Table/Tabels/Names/Gnome/GnomeNames.xml
-            string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RPG_Table", "Tabels", "Names");
+            string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RPG_Table", "Tabels", "Names", "Gnome");
             _filePath = Path.Combine(directoryPath, "GnomeNames.xml");
 
             // Ensure the directory and file exist, if not, create them
@@ -71,20 +71,60 @@ namespace rpg_tabel.Logic.namegenerator.names
                 var doc = new XDocument(
                     new XElement("Names",
                         new XElement("FirstNames",
-                            new XElement("Name", "Fizban"),
-                            new XElement("Name", "Gimble"),
-                            new XElement("Name", "Nimble"),
-                            new XElement("Name", "Tink"),
-                            new XElement("Name", "Zook")
-                        // Add more default first names here
+                            GenerateNameElements(new[]
+                            {
+                                "Fizban", "Gimble", "Nimble", "Tink", "Zook",
+                                "Boddynock", "Quinn", "Rumble", "Trixie", "Wizzle",
+                                "Bran", "Dabble", "Fizzle", "Glim", "Hob",
+                                "Jinx", "Kip", "Merry", "Pip", "Sprig",
+                                "Wobble", "Dingle", "Fizzlebang", "Glimmer", "Kibble",
+                                "Mumble", "Puddle", "Snick", "Tumble", "Whimsy",
+                                "Yankee", "Zeb", "Fizzlepop", "Hobble", "Jingle",
+                                "Kibble", "Noodle", "Pipkin", "Sprocket", "Twiddle",
+                                "Wizzle", "Bramble", "Cobble", "Fizzlepop", "Grizzle",
+                                "Hobnob", "Jumble", "Krum", "Muddle", "Nibble",
+                                "Pinkle", "Rizzle", "Scrap", "Trinket", "Whizzle",
+                                "Yonder", "Zabble", "Bingle", "Crank", "Dizzy",
+                                "Gizmo", "Hitch", "Jolly", "Kipkin", "Lynx",
+                                "Muffin", "Pipkin", "Quibble", "Razzle", "Sizzle",
+                                "Tumble", "Whiffle", "Xan", "Zappy", "Bingle"
+                            }),
+                            GenerateNameElements(new[]
+                            {
+                                "Burrow", "Gearspring", "Merrimint", "Nobble", "Whistle",
+                                "Brassbelt", "Fizzlepop", "Hickory", "Jingle", "Merrymaker",
+                                "Pipkin", "Quill", "Sprocket", "Tumble", "Wrench",
+                                "Yewleaf", "Zingle", "Blink", "Feather", "Grimble",
+                                "Rusty", "Tinkertop", "Grizzle", "Spark", "Wobble",
+                                "Whistle", "Crank", "Hobble", "Jabber", "Muffin",
+                                "Rustbucket", "Tinker", "Whizbang", "Glimmer", "Sprocket",
+                                "Bolt", "Dabble", "Fizzle", "Jingle", "Muddle",
+                                "Nimble", "Pipkin", "Rumble", "Sprocket", "Twizzle",
+                                "Wobble", "Yankee", "Zoot", "Fizzlebang", "Jinx",
+                                "Mirth", "Rumble", "Sprocket", "Tumble", "Wizzle",
+                                "Crinkle", "Glim", "Hickory", "Merrimint", "Puddle",
+                                "Razzle", "Snick", "Tinker", "Wobble", "Zimble",
+                                "Brass", "Dizzy", "Flick", "Jinx", "Wizzle"
+                            })
                         ),
                         new XElement("LastNames",
-                            new XElement("Name", "Burrow"),
-                            new XElement("Name", "Gearspring"),
-                            new XElement("Name", "Merrimint"),
-                            new XElement("Name", "Nobble"),
-                            new XElement("Name", "Whistle")
-                        // Add more default last names here
+                            GenerateNameElements(new[]
+                            {
+                                "Burrow", "Gearspring", "Merrimint", "Nobble", "Whistle",
+                                "Brassbelt", "Fizzlepop", "Hickory", "Jingle", "Merrymaker",
+                                "Pipkin", "Quill", "Sprocket", "Tumble", "Wrench",
+                                "Yewleaf", "Zingle", "Blink", "Feather", "Grimble",
+                                "Rusty", "Tinkertop", "Grizzle", "Spark", "Wobble",
+                                "Whistle", "Crank", "Hobble", "Jabber", "Muffin",
+                                "Rustbucket", "Tinker", "Whizbang", "Glimmer", "Sprocket",
+                                "Bolt", "Dabble", "Fizzle", "Jingle", "Muddle",
+                                "Nimble", "Pipkin", "Rumble", "Sprocket", "Twizzle",
+                                "Wobble", "Yankee", "Zoot", "Fizzlebang", "Jinx",
+                                "Mirth", "Rumble", "Sprocket", "Tumble", "Wizzle",
+                                "Crinkle", "Glim", "Hickory", "Merrimint", "Puddle",
+                                "Razzle", "Snick", "Tinker", "Wobble", "Zimble",
+                                "Brass", "Dizzy", "Flick", "Jinx", "Wizzle"
+                            })
                         )
                     )
                 );
@@ -98,6 +138,11 @@ namespace rpg_tabel.Logic.namegenerator.names
             {
                 Console.WriteLine($"Error creating default GnomeNames.xml file: {ex.Message}");
             }
+        }
+
+        private IEnumerable<XElement> GenerateNameElements(IEnumerable<string> names)
+        {
+            return names.Select(name => new XElement("Name", name));
         }
     }
 }
