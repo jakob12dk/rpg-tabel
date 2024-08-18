@@ -117,3 +117,4 @@ namespace rpg_tabel.Logic.namegenerator.names
             }
         }
     }
+}
