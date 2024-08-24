@@ -16,28 +16,30 @@
 
         private void InitializeComponent()
         {
-            this.listBoxDevices = new ListBox();
-            this.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DevicesListForm));
+            listBoxDevices = new ListBox();
+            SuspendLayout();
             // 
             // listBoxDevices
             // 
-            this.listBoxDevices.Dock = DockStyle.Fill;
-            this.listBoxDevices.FormattingEnabled = true;
-            this.listBoxDevices.ItemHeight = 15;
-            this.listBoxDevices.Location = new Point(0, 0);
-            this.listBoxDevices.Name = "listBoxDevices";
-            this.listBoxDevices.Size = new Size(400, 300);
-            this.listBoxDevices.TabIndex = 0;
+            listBoxDevices.Dock = DockStyle.Fill;
+            listBoxDevices.FormattingEnabled = true;
+            listBoxDevices.ItemHeight = 15;
+            listBoxDevices.Location = new Point(0, 0);
+            listBoxDevices.Name = "listBoxDevices";
+            listBoxDevices.Size = new Size(400, 300);
+            listBoxDevices.TabIndex = 0;
             // 
             // DevicesListForm
             // 
-            this.AutoScaleDimensions = new SizeF(7F, 15F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(400, 300);
-            this.Controls.Add(this.listBoxDevices);
-            this.Name = "DevicesListForm";
-            this.Text = "Found Devices";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(400, 300);
+            Controls.Add(listBoxDevices);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "DevicesListForm";
+            Text = "Found Devices";
+            ResumeLayout(false);
         }
     }
 }

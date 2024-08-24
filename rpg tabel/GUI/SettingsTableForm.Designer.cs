@@ -70,6 +70,7 @@ namespace rpg_tabel.GUI
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsTableForm));
             dataGridViewSettings = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
@@ -99,6 +100,7 @@ namespace rpg_tabel.GUI
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(dataGridViewSettings);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SettingsTableForm";
             Text = "Settings Table";
             FormClosing += SettingsTableForm_FormClosing;

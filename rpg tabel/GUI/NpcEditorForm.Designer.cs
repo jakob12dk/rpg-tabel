@@ -28,51 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridViewNpc = new DataGridView();
-            this.btnGenerate = new Button();
-            this.btnSave = new Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNpc)).BeginInit();
-            this.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NpcEditorForm));
+            dataGridViewNpc = new DataGridView();
+            btnGenerate = new Button();
+            btnSave = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNpc).BeginInit();
+            SuspendLayout();
             // 
             // dataGridViewNpc
             // 
-            this.dataGridViewNpc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewNpc.Location = new System.Drawing.Point(12, 12);
-            this.dataGridViewNpc.Name = "dataGridViewNpc";
-            this.dataGridViewNpc.Size = new System.Drawing.Size(776, 366);
-            this.dataGridViewNpc.TabIndex = 0;
+            dataGridViewNpc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewNpc.Location = new Point(12, 12);
+            dataGridViewNpc.Name = "dataGridViewNpc";
+            dataGridViewNpc.Size = new Size(776, 366);
+            dataGridViewNpc.TabIndex = 0;
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(12, 384);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerate.TabIndex = 1;
-            this.btnGenerate.Text = "Generate";
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.BtnGenerate_Click);
+            btnGenerate.Location = new Point(12, 384);
+            btnGenerate.Name = "btnGenerate";
+            btnGenerate.Size = new Size(75, 23);
+            btnGenerate.TabIndex = 1;
+            btnGenerate.Text = "Generate";
+            btnGenerate.UseVisualStyleBackColor = true;
+            btnGenerate.Click += BtnGenerate_Click;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(713, 384);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            btnSave.Location = new Point(713, 384);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(75, 23);
+            btnSave.TabIndex = 2;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += BtnSave_Click;
             // 
             // NpcEditorForm
             // 
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnGenerate);
-            this.Controls.Add(this.dataGridViewNpc);
-            this.Name = "NpcEditorForm";
-            this.Text = "NPC Editor";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNpc)).EndInit();
-            this.ResumeLayout(false);
-
+            ClientSize = new Size(800, 450);
+            Controls.Add(btnSave);
+            Controls.Add(btnGenerate);
+            Controls.Add(dataGridViewNpc);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "NpcEditorForm";
+            Text = "NPC Editor";
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNpc).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using rpg_tabel.Logic.namegenerator;
+using rpg_tabel.Logic.NpcGenerator;
 using rpg_tabel.Logic.NpcGenerator.npcs;
 using System;
 using System.Collections.Generic;
@@ -128,6 +129,7 @@ namespace rpg_tabel.GUI
             {
                 MessageBox.Show($"Error saving NPC: {ex.Message}");
             }
+           
         }
 
         private DataGridView dataGridViewNpc;

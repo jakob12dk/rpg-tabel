@@ -103,10 +103,12 @@ namespace rpg_tabel
         {
             var npcEditorForm = new NpcEditorForm();
             npcEditorForm.ShowDialog();
+            LoadNpcNames();
         }
 
         private void listNpc_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             if (listNpc.SelectedItem != null)
             {
                 string selectedNpcName = listNpc.SelectedItem.ToString();
@@ -115,6 +117,7 @@ namespace rpg_tabel
         }
         private void OpenNpcEditor(string npcName)
         {
+            LoadNpcNames();
             try
             {
                 // Define the path to the NPC directory and file
@@ -162,6 +165,7 @@ namespace rpg_tabel
         }
         private async void btnLoadMethods_Click(object sender, EventArgs e)
         {
+            LoadNpcNames();
             if (_arduinoConnection == null || !_arduinoConnection.IsConnected)
             {
                 MessageBox.Show("Not connected to Arduino.");
@@ -186,6 +190,7 @@ namespace rpg_tabel
 
         private void ListArduinoMethods_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LoadNpcNames();
             if (listArduinoMethods.SelectedItem != null)
             {
                 string selectedMethod = listArduinoMethods.SelectedItem.ToString();
@@ -203,6 +208,7 @@ namespace rpg_tabel
 
         private void BtnSessionNotes_Click(object sender, EventArgs e)
         {
+            LoadNpcNames();
             var sessionNoteForm = new SessionNoteForm();
             sessionNoteForm.ShowDialog();
         }

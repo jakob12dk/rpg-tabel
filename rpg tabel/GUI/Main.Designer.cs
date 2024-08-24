@@ -145,6 +145,7 @@ namespace rpg_tabel
         // Initialize the UI components
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             btnSearch = new Button();
             lblConnetion = new Label();
             btnSettings = new Button();
@@ -217,7 +218,7 @@ namespace rpg_tabel
     FantasyRace.HalfOrc
     };
             CBNamegerator.FormattingEnabled = true;
-            CBNamegerator.DataSource = Enum.GetValues(typeof(FantasyRace));
+            
             CBNamegerator.Location = new Point(15, 102);
             CBNamegerator.Name = "CBNamegerator";
             CBNamegerator.Size = new Size(121, 23);
@@ -316,11 +317,13 @@ namespace rpg_tabel
             Controls.Add(btnSettings);
             Controls.Add(lblConnetion);
             Controls.Add(btnSearch);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
             Text = "RPG Table";
             WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
+            LoadNpcNames();
         }
 
         private Button btnSearch;
